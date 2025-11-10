@@ -1,0 +1,2 @@
+# assume one will execute crontab -e in this folder
+*/1 * * * * ./collect.sh && ./preprocessed.sh && ./train.sh
