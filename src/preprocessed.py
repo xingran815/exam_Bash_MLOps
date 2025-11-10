@@ -39,9 +39,10 @@ with open(os.path.join(raw_dir, latest_file), "r") as f:
         line = line.strip()
         if line:
             timestamp, model, sales_value = line.split(",")
-            if int(sales_value) < 0:
+            sales_value = int(sales_value)
+            if sales_value < 0:
                sales_value = 0
-            sales[model] = int(sales_value)
+            sales[model] = sales_value
 
 # 2. Save the processed data to a new CSV file in data/processed/
 processed_dir = os.path.join(this_dir, "../data/processed/")
@@ -52,9 +53,8 @@ processed_file = "sales_processed_" + latest_file.split(".")[0][6:] + ".csv"
 processed_file = os.path.join(processed_dir, processed_file)
 # write the processed data to the file
 with open(processed_file, "w") as f:
-    f.write("model,sales\n")
-    for model, sales_value in sales.items():
-        f.write(f"{model},{sales_value}\n")
+    f.write(f"rtx3060,rtx3070,rtx3080,rtx3090,rx6700\n")
+    f.write(f"{sales['rtx3060']},{sales['rtx3070']},{sales['rtx3080']},{sales['rtx3090']},{sales['rx6700']}\n")
 
 # 3. Log the preprocessing activity in the logs/preprocessed.logs file.
 log_file = os.path.join(this_dir, "../logs/preprocessed.logs")

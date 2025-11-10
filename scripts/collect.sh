@@ -1,3 +1,4 @@
+#!/bin/bash
 # ==============================================================================
 # Script: collect.sh
 # Description:
@@ -34,6 +35,7 @@ this_dir=$(dirname "$0")
 # 1. Set the timestamp for the output file
 timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 output_timestamp=$(date -u +"%Y%m%d_%H%M")
+echo "timestamp,model,sales" > "${this_dir}/../data/raw/sales_${output_timestamp}.csv"
 
 # 2. Query the API for each model and append the results to the output file
 declare -A sales
